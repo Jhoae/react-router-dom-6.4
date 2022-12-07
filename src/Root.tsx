@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './components/Header';
 
 function Root() {
+  const [darkMode, setDarkMode] = useState(false);
+  console.log(darkMode);
+  const fn = (prev: boolean) => {
+    setDarkMode((prev) => !prev);
+    console.log('Asd');
+  };
   return (
     <div>
-      hiiiiiiiiii
+      <button onClick={() => fn(darkMode)}>
+        Now useOutletContext :: {darkMode ? 'DarkMode' : 'LightMode'}
+      </button>
       <Header />
-      <Outlet />
+      <Outlet context={{ darkMode: darkMode }} />
     </div>
   );
 }

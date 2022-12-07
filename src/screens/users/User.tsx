@@ -1,4 +1,10 @@
-import { Link, Outlet, useParams } from 'react-router-dom';
+import {
+  Link,
+  Outlet,
+  useOutlet,
+  useOutletContext,
+  useParams,
+} from 'react-router-dom';
 import { users } from '../../db';
 
 function User() {
@@ -7,7 +13,10 @@ function User() {
   const userId = params.userId;
  ===
   */
+  //  const { userId } = useParams();
   const { userId } = useParams();
+
+  console.log('afffsfffd', useOutletContext());
 
   return (
     <div>
@@ -16,7 +25,11 @@ function User() {
       </h1>
       <hr />
       <Link to="followers">See Followers</Link>
-      <Outlet />
+      <Outlet
+        context={{
+          nameOfUser: users[Number(userId) - 1].name,
+        }}
+      />
     </div>
   );
 }
